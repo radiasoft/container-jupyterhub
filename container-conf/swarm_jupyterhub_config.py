@@ -1,31 +1,40 @@
-from dockerspawner import DockerSpawner
+from cassinyspawner.swarmspawner import SwarmSpawner
 from jupyter_client.localinterfaces import public_ips
 import base64
 
-c.JupyterHub.spawner_class = DockerSpawner
+c.JupyterHub.spawner_class = SwarmSpawner
 c.JupyterHub.authenticator_class = 'jupyterhub.auth.PAMAuthenticator'
 
 c.Authenticator.admin_users = set(['vagrant'])
 
-c.DockerSpawner.http_timeout = 120
-c.DockerSpawner.container_image = 'radiasoft/beamsim-jupyter:dev'
-c.DockerSpawner.remove_containers = True
-c.DockerSpawner.use_internal_ip = True
-c.DockerSpawner.volumes = {
-    '$PWD/run/jupyterhub/{username}': {
-        # POSIT: notebook_dir in containers/radiasoft/beamsim-jupyter/build.sh
-        'bind': '/home/vagrant/jupyter',
-    },
-    '$PWD/run/scratch/{username}': {
-        'bind': '/home/vagrant/scratch',
-    },
+c.SwarmSpawner.networks = ['jupyterhub']
+c.SwarmSpawner.jupyterhub_service_name = 'jupyterhub'
+
+#from docker.types import Mount, ContainerSpec, TaskTemplate, DriverConfig
+#driver_cfg = DriverConfig(name=None, options={
+#      'o': 'addr=10.x.x.x',
+#      'device': ':/docker/pgtest'
+#      'type': 'nfs4'
+#    })
+#m = Mount(type='volume', target='/var/lib/postgresql/data', driver_config=driver_cfg, source=None)
+c.SwarmSpawner.container_spec = {
+    'args' : [],
+    'Image' : "radiasoft/beamsim-jupyter:20180112.210821",
+    'mounts': [
+        {
+            'type': 'bind',
+#{username}
+            'source': '$PWD/run/jupyterhub/vagrant',
+            'target': '/home/vagrant/jupyter',
+        },
+    ],
 }
 
 c.JupyterHub.confirm_no_ssl = True
 c.JupyterHub.cookie_secret = base64.b64decode('qBdGBamOJTk5REgm7GUdsReB4utbp4g+vBja0SwY2IQojyCxA+CwzOV5dTyPJWvK13s61Yie0c/WDUfy8HtU2w==')
 # No need to test postgres
 #c.JupyterHub.db_url = 'postgresql://jupyterhub:Ydt21HRKO7NnMBIC@postgresql-jupyterhub:5432/jupyterhub'
-c.JupyterHub.hub_ip = public_ips()[0]
+c.JupyterHub.hub_ip = '0.0.0.0'
 c.JupyterHub.ip = '0.0.0.0'
 c.JupyterHub.port = 8000
 c.JupyterHub.proxy_auth_token = '+UFr+ALeDDPR4jg0WNX+hgaF0EV5FNat1A3Sv0swbrg='
