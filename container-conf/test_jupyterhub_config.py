@@ -8,7 +8,7 @@ c.JupyterHub.authenticator_class = 'jupyterhub.auth.PAMAuthenticator'
 c.Authenticator.admin_users = set(['vagrant'])
 
 c.DockerSpawner.http_timeout = 120
-c.DockerSpawner.container_image = 'radiasoft/beamsim-jupyter:dev'
+c.DockerSpawner.container_image = 'radiasoft/beamsim-jupyter'
 c.DockerSpawner.remove_containers = True
 c.DockerSpawner.use_internal_ip = True
 c.DockerSpawner.volumes = {
@@ -29,6 +29,7 @@ c.JupyterHub.hub_ip = public_ips()[0]
 c.JupyterHub.ip = '0.0.0.0'
 c.JupyterHub.port = 8000
 c.JupyterHub.proxy_auth_token = '+UFr+ALeDDPR4jg0WNX+hgaF0EV5FNat1A3Sv0swbrg='
+c.JupyterHub.authenticator_class = 'jupyterhub.auth.PAMAuthenticator'
 
 # Debugging only
 c.Application.log_level = 'DEBUG'
