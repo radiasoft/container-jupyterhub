@@ -1,5 +1,5 @@
 #!/bin/bash
-build_image_base=jupyterhub/jupyterhub:0.8.1
+build_image_base=jupyterhub/jupyterhub:0.9.4
 build_simply=1
 build_docker_cmd='[]'
 build_is_public=1
