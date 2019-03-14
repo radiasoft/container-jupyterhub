@@ -5,12 +5,14 @@ build_docker_cmd='[]'
 build_is_public=1
 
 build_as_root() {
+    umask 022
     apt-get update
-    apt-get -y install libpq-dev build-essential
-    pip install Psycopg2
+    apt-get -y install build-essential
     pip install 'ipython[all]'
     pip install git+git://github.com/jupyterhub/oauthenticator.git
     pip install git+git://github.com/jupyterhub/dockerspawner.git
+    pip install git+git://github.com/radiasoft/pykern.git
+    pip install git+git://github.com/radiasoft/rsdockerspawner.git
     echo '# Real cfg in conf/jupyterhub_config.py' > /srv/jupyterhub/jupyterhub_config.py
     # Convenient to have "vagrant" user for development
     build_create_run_user
