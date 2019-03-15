@@ -9,8 +9,8 @@ build_as_root() {
     apt-get update
     apt-get -y install build-essential
     pip install 'ipython[all]'
-    pip install git+git://github.com/jupyterhub/oauthenticator.git
-    pip install git+git://github.com/jupyterhub/dockerspawner.git
+    pip install git+git://github.com/jupyterhub/oauthenticator.git@0.8.1
+    pip install git+git://github.com/jupyterhub/dockerspawner.git@0.11.0
     pip install git+git://github.com/radiasoft/pykern.git
     pip install git+git://github.com/radiasoft/rsdockerspawner.git
     echo '# Real cfg in conf/jupyterhub_config.py' > /srv/jupyterhub/jupyterhub_config.py
