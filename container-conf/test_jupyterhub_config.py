@@ -28,12 +28,6 @@ c.DockerSpawner.volumes = {
         # parameterize anyway, because matches above
         'bind': '/home/vagrant/jupyter',
     },
-    '$PWD/radia-run': {
-        # POSIT: notebook_dir in
-        # radiasoft/container-beamsim-jupyter/container-conf/build.sh
-        # parameterize anyway, because matches above
-        'bind': '/home/vagrant/.radia-run',
-    },
 }
 # Allow JupyterHub to restart without killing containers
 c.DockerSpawner.network_name = 'host'
