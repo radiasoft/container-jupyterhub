@@ -14,7 +14,6 @@ build_as_root() {
     pip install git+git://github.com/radiasoft/pykern.git
     pip install git+git://github.com/radiasoft/rsdockerspawner.git
     echo '# Real cfg in conf/jupyterhub_config.py' > /srv/jupyterhub/jupyterhub_config.py
-    # Convenient to have "vagrant" user for development
     build_create_run_user
     apt-get remove --purge -y build-essential
     apt-get autoremove --purge -y
