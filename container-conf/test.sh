@@ -1,13 +1,12 @@
 #!/bin/bash
 set -euo pipefail
-docker rm --force jupyter-vagrant 2>& /dev/null || true
-docker rm --force jupyterhub 2>& /dev/null || true
+docker rm --force jupyter-vagrant >& /dev/null || true
+docker rm --force jupyterhub >& /dev/null || true
 rm -rf run
-export HOST=$(hostname -f)
 export USER_D=$PWD/run/user
-mkdir -p run/{"$HOST",user/vagrant}
-cd run/"$HOST"
 export TLS_DIR=/srv/jupyterhub
+mkdir -p run/{localhost.localdomain,user/vagrant}
+cd run/localhost.localdomain
 sudo cat /etc/docker/tls/cert.pem > cert.pem
 sudo cat /etc/docker/tls/key.pem > key.pem
 cp cert.pem cacert.pem
@@ -17,11 +16,20 @@ args=(
     --rm
     --tty
     --name jupyterhub
+    --network=host
     -u vagrant
-    -p 8000:8000
     -v $PWD/run:/srv/jupyterhub
     -v $PWD/run:/var/db/jupyterhub
+)
+d=$HOME/src/radiasoft/rsdockerspawner/rsdockerspawner
+if [[ -d $d ]]; then
+    echo "Mount: $d"
+    args+=(
+        -v "$d:/opt/conda/lib/python3.6/site-packages/rsdockerspawner"
+    )
+fi
+args+=(
     radiasoft/jupyterhub
     jupyterhub -f /srv/jupyterhub/jupyterhub_config.py
 )
-docker run "${args[@]}"
+exec docker run "${args[@]}"

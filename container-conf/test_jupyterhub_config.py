@@ -21,33 +21,30 @@ c.DockerSpawner.image_whitelist = []
 c.DockerSpawner.image = 'radiasoft/beamsim-jupyter'
 c.DockerSpawner.remove = False
 c.DockerSpawner.use_internal_ip = True
-c.DockerSpawner.volumes = {
-    '$USER_D/{username}': {
-        # POSIT: notebook_dir in
-        # radiasoft/container-beamsim-jupyter/container-conf/build.sh
-        # parameterize anyway, because matches above
-        'bind': '/home/vagrant/jupyter',
-    },
-}
 # Allow JupyterHub to restart without killing containers
 c.DockerSpawner.network_name = 'host'
 c.RSDockerSpawner.cfg = '''{
     "pools": {
-        "default": {
+        "everybody": {
             "hosts": [
-                "$HOST"
+                "localhost.localdomain"
             ],
             "min_activity_hours": 1,
-            "servers_per_host": 2,
-            "users": []
+            "servers_per_host": 2
         }
     },
     "port_base": 8100,
-    "tls_dir": "$TLS_DIR"
+    "tls_dir": "$TLS_DIR",
+    "volumes": {
+        "/srv/jupyterhub/user/{username}": {
+            "bind": "/home/vagrant/jupyter"
+        }
+    }
 }
 '''
 from rsdockerspawner import rsdockerspawner
 c.JupyterHub.spawner_class = rsdockerspawner.RSDockerSpawner
+c.Spawner.default_url = '/lab'
 c.Application.log_level = 'DEBUG'
 #c.JupyterHub.debug_db = True
 c.ConfigurableHTTPProxy.debug = True
