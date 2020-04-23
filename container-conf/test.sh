@@ -5,6 +5,7 @@ docker rm --force jupyterhub >& /dev/null || true
 rm -rf run
 export USER_D=$PWD/run/user
 export TLS_DIR=/srv/jupyterhub
+export PUBLIC_IP=$(hostname -i)
 mkdir -p run/{localhost.localdomain,user/vagrant}
 cd run/localhost.localdomain
 sudo cat /etc/docker/tls/cert.pem > cert.pem
@@ -17,19 +18,19 @@ args=(
     --tty
     --name jupyterhub
     --network=host
+    --workdir=/srv/jupyterhub
     -u vagrant
     -v $PWD/run:/srv/jupyterhub
-    -v $PWD/run:/var/db/jupyterhub
 )
 d=$HOME/src/radiasoft/rsdockerspawner/rsdockerspawner
 if [[ -d $d ]]; then
     echo "Mount: $d"
     args+=(
-        -v "$d:/opt/conda/lib/python3.6/site-packages/rsdockerspawner"
+        -v "$d:$(python -c 'from distutils.sysconfig import get_python_lib as x; print(x())')"/rsdockerspawner
     )
 fi
 args+=(
     radiasoft/jupyterhub
-    jupyterhub -f /srv/jupyterhub/jupyterhub_config.py
+    bash -l -c 'jupyterhub -f /srv/jupyterhub/jupyterhub_config.py'
 )
 exec docker run "${args[@]}"
