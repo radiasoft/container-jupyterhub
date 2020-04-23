@@ -38,9 +38,9 @@ c.RSDockerSpawner.cfg = '''{
     "port_base": 8100,
     "tls_dir": "$TLS_DIR",
     "volumes": {
-        "/srv/jupyterhub/user/{username}": {
+        "$PWD/run/user/{username}": {
             "bind": "/home/vagrant/jupyter"
-        },
+        }
     }
 }
 '''
