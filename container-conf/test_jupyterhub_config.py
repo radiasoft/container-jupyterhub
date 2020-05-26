@@ -29,8 +29,11 @@ c.RSDockerSpawner.cfg = '''{
     "pools": {
         "everybody": {
             "hosts": [
-                "localhost.localdomain"
+                "$POOL_HOST"
             ],
+            "cpu_limit": 2,
+            "mem_limit": "1G",
+            "shm_size": "256M",
             "min_activity_hours": 1,
             "servers_per_host": 2
         }

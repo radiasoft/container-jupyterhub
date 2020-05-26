@@ -6,11 +6,14 @@ rm -rf run
 export USER_D=$PWD/run/user
 export TLS_DIR=/srv/jupyterhub
 export PUBLIC_IP=$(hostname -i)
-mkdir -p run/{localhost.localdomain,user/vagrant}
-cd run/localhost.localdomain
+export POOL_HOST=$(hostname -f)
+# don't use $DOCKER_HOST, because docker run below will try to
+# use it.
+mkdir -p run/{"$POOL_HOST",user/vagrant}
+cd run/"$POOL_HOST"
 sudo cat /etc/docker/tls/cert.pem > cert.pem
 sudo cat /etc/docker/tls/key.pem > key.pem
-cp cert.pem cacert.pem
+sudo cat /etc/docker/tls/cacert.pem > cacert.pem
 cd ../..
 perl -p -e 's/\$([A-Z_]+)/$ENV{$1}/eg' test_jupyterhub_config.py > run/jupyterhub_config.py
 args=(
