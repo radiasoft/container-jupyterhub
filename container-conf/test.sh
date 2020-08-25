@@ -13,7 +13,7 @@ mkdir -p run/{"$POOL_HOST",user/vagrant}
 cd run/"$POOL_HOST"
 sudo cat /etc/docker/tls/cert.pem > cert.pem
 sudo cat /etc/docker/tls/key.pem > key.pem
-sudo cat /etc/docker/tls/cacert.pem > cacert.pem
+(sudo cat /etc/docker/tls/cacert.pem || sudo cat /etc/docker/tls/cert.pem) > cacert.pem
 cd ../..
 perl -p -e 's/\$([A-Z_]+)/$ENV{$1}/eg' test_jupyterhub_config.py > run/jupyterhub_config.py
 args=(
