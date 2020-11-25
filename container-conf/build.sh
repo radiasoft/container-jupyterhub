@@ -24,4 +24,5 @@ build_as_run_user() {
     pip install git+git://github.com/jupyterhub/dockerspawner.git@0.11.1
     pip install git+git://github.com/radiasoft/pykern.git
     pip install git+git://github.com/radiasoft/rsdockerspawner.git
+    pip install git+git://github.com/radiasoft/sirepo.git
 }
