@@ -5,6 +5,8 @@ build_is_public=1
 
 build_as_root() {
     umask 022
+    # POSIT: This is sirepo.srdb_root
+    mkdir -p /srv/sirepo/db
     mkdir -p /srv/jupyterhub
     echo '# Real cfg in conf/jupyterhub_config.py' > /srv/jupyterhub/jupyterhub_config.py
     # libffi-devel needed by devel
