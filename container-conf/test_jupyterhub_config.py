@@ -27,7 +27,7 @@ c.DockerSpawner.use_internal_ip = True
 c.DockerSpawner.network_name = 'host'
 c.RSDockerSpawner.cfg = '''{
     "pools": {
-        "everybody": {
+        "private": {
             "hosts": [
                 "$POOL_HOST"
             ],
@@ -35,11 +35,15 @@ c.RSDockerSpawner.cfg = '''{
             "mem_limit": "1G",
             "shm_size": "256M",
             "min_activity_hours": 1,
-            "servers_per_host": 2
+            "servers_per_host": 2,
+            "user_groups": [ "private" ]
         }
     },
     "port_base": 8100,
     "tls_dir": "$TLS_DIR",
+    "user_groups": {
+        "private": [ "vagrant" ]
+    },
     "volumes": {
         "$PWD/run/user/{username}": {
             "bind": "/home/vagrant/jupyter"
