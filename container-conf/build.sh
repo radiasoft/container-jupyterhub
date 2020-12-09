@@ -5,6 +5,8 @@ build_is_public=1
 
 build_as_root() {
     umask 022
+    # POSIT: This is sirepo.srdb_root
+    mkdir -p /srv/sirepo/db
     mkdir -p /srv/jupyterhub
     echo '# Real cfg in conf/jupyterhub_config.py' > /srv/jupyterhub/jupyterhub_config.py
     # libffi-devel needed by devel
@@ -24,4 +26,5 @@ build_as_run_user() {
     pip install git+git://github.com/jupyterhub/dockerspawner.git@0.11.1
     pip install git+git://github.com/radiasoft/pykern.git
     pip install git+git://github.com/radiasoft/rsdockerspawner.git
+    pip install git+git://github.com/radiasoft/sirepo.git
 }
