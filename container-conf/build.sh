@@ -1,5 +1,5 @@
 #!/bin/bash
-build_image_base=radiasoft/fedora
+build_image_base=radiasoft/python3
 build_docker_cmd='[]'
 build_is_public=1
 
@@ -15,9 +15,8 @@ build_as_root() {
 
 build_as_run_user() {
     umask 022
-    mkdir -p ~/.local/{bin,lib}
+    mkdir -p "$HOME"/.local/{bin,lib}
     npm install -g configurable-http-proxy
-    bivio_pyenv_3
     pip install wheel
     # POSIT: versions same in container-beamsim-jupyter/build.sh
     pip install jupyterhub==1.1.0 jupyterlab==2.1.0
