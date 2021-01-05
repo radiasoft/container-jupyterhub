@@ -22,9 +22,9 @@ build_as_run_user() {
     # POSIT: versions same in container-beamsim-jupyter/build.sh
     pip install jupyterhub==1.1.0 jupyterlab==2.1.0
     pip install ipywidgets
-    pip install git+git://github.com/jupyterhub/oauthenticator.git@0.10.0
-    pip install git+git://github.com/jupyterhub/dockerspawner.git@0.11.1
-    pip install git+git://github.com/radiasoft/pykern.git
-    pip install git+git://github.com/radiasoft/rsdockerspawner.git
-    pip install git+git://github.com/radiasoft/sirepo.git
+    pip install git+https://github.com/jupyterhub/oauthenticator.git@0.10.0
+    pip install git+https://github.com/jupyterhub/dockerspawner.git@0.11.1
+    pip install git+https://github.com/radiasoft/pykern.git
+    pip install git+https://github.com/radiasoft/rsdockerspawner.git
+    pip install git+https://github.com/radiasoft/sirepo.git
 }
