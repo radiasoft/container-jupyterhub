@@ -10,12 +10,14 @@ build_as_root() {
     mkdir -p /srv/jupyterhub
     echo '# Real cfg in conf/jupyterhub_config.py' > /srv/jupyterhub/jupyterhub_config.py
     # libffi-devel needed by devel
-    install_yum_install nodejs npm libffi-devel
+    install_yum_install libffi-devel
 }
 
 build_as_run_user() {
+    install_source_bashrc
     umask 022
     mkdir -p "$HOME"/.local/{bin,lib}
+    _jupyterhub_nvm
     # POSIT: same version in radiasoft/sirepo/etc/run.sh
     npm install --global configurable-http-proxy@4.6.3
     pip install wheel
@@ -28,4 +30,13 @@ build_as_run_user() {
     pip install git+https://github.com/radiasoft/pykern.git
     pip install git+https://github.com/radiasoft/rsdockerspawner.git
     pip install git+https://github.com/radiasoft/sirepo.git
+}
+
+_jupyterhub_nvm() {
+    # Required when NVM_DIR is set
+    mkdir -p "$NVM_DIR"
+    install_download https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh '' nvm 0.40.3 | PROFILE=/dev/null bash
+    install_source_bashrc
+    # Matches nodejs on fedora 36
+    nvm install node 16.18.1
 }
