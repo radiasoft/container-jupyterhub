@@ -38,5 +38,5 @@ _jupyterhub_nvm() {
     install_download https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh '' nvm 0.40.3 | PROFILE=/dev/null bash
     install_source_bashrc
     # Matches nodejs on fedora 36
-    nvm install node 16.18.1
+    nvm install 16.18.1
 }
