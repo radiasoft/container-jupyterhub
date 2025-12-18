@@ -19,7 +19,7 @@ build_as_run_user() {
     mkdir -p "$HOME"/.local/{bin,lib}
     _jupyterhub_nvm
     # POSIT: same version in radiasoft/sirepo/etc/run.sh
-    npm install --global configurable-http-proxy
+    npm install --global configurable-http-proxy@5.1.0
     install_pip_install ipywidgets==8.1.8 oauthenticator==17.3.0 dockerspawner==14.0.0
     # DEBUG: pull from local
     install_pip_install pykern sirepo
