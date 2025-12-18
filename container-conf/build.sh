@@ -20,11 +20,10 @@ build_as_run_user() {
     _jupyterhub_nvm
     # POSIT: same version in radiasoft/sirepo/etc/run.sh
     npm install --global configurable-http-proxy
-    install_pip_install ipywidgets oauthenticator dockerspawner
-    # For testing, pull from local
-    install_pip_install pykern
+    install_pip_install ipywidgets==8.1.8 oauthenticator==17.3.0 dockerspawner==14.0.0
+    # DEBUG: pull from local
+    install_pip_install pykern sirepo
     install_pip_install git+https://github.com/radiasoft/rsdockerspawner.git
-    install_pip_install sirepo
 }
 
 _jupyterhub_nvm() {
