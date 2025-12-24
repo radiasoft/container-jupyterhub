@@ -1,11 +1,14 @@
 #!/bin/bash
+# To test inline:
+# jupyterhub -f run/jupyterhub_config.py
+#
 set -euo pipefail
 docker rm --force jupyter-vagrant >& /dev/null || true
 docker rm --force jupyterhub >& /dev/null || true
 rm -rf run
 export USER_D=$PWD/run/user
 export TLS_DIR=/srv/jupyterhub
-export PUBLIC_IP=$(hostname -i)
+export PUBLIC_IP=127.0.0.1
 export POOL_HOST=$(hostname -f)
 if [[ ! $(sudo cat /etc/docker/daemon.json) =~ $POOL_HOST ]]; then
     export POOL_HOST=localhost.localdomain
@@ -44,7 +47,7 @@ args+=(
     radiasoft/jupyterhub
     bash -l -c 'jupyterhub -f /srv/jupyterhub/jupyterhub_config.py'
 )
-# to test docker
+# to test docker works
 : docker \
     --host=://$POOL_HOST:2376 \
     --tlscacert=run/$POOL_HOST/cacert.pem \
