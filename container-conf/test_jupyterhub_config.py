@@ -69,9 +69,9 @@ c.RSDockerSpawner.cfg = """{
 from rsdockerspawner import rsdockerspawner
 
 c.JupyterHub.spawner_class = rsdockerspawner.RSDockerSpawner
-c.Application.log_level = "DEBUG"
+#c.Application.log_level = "DEBUG"
 # c.JupyterHub.debug_db = True
-c.ConfigurableHTTPProxy.debug = True
-c.JupyterHub.log_level = "DEBUG"
-c.LocalProcessSpawner.debug = True
-c.Spawner.debug = True
+#c.ConfigurableHTTPProxy.debug = True
+#c.JupyterHub.log_level = "DEBUG"
+#c.LocalProcessSpawner.debug = True
+#c.Spawner.debug = True
