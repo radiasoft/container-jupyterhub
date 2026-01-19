@@ -26,6 +26,7 @@ c.JupyterHub.upgrade_db = True
 c.ConfigurableHTTPProxy.auth_token = (
     "17992634c6c7489d533c1fb0ea0b95d84a6911a2076c451e1ea9041be7b63de1"
 )
+c.DockerSpawner.escape = "legacy"
 c.DockerSpawner.http_timeout = 60
 c.DockerSpawner.image_whitelist = []
 c.DockerSpawner.image = "radiasoft/beamsim-jupyter"
@@ -69,9 +70,9 @@ c.RSDockerSpawner.cfg = """{
 from rsdockerspawner import rsdockerspawner
 
 c.JupyterHub.spawner_class = rsdockerspawner.RSDockerSpawner
-#c.Application.log_level = "DEBUG"
+# c.Application.log_level = "DEBUG"
 # c.JupyterHub.debug_db = True
-#c.ConfigurableHTTPProxy.debug = True
-#c.JupyterHub.log_level = "DEBUG"
-#c.LocalProcessSpawner.debug = True
-#c.Spawner.debug = True
+# c.ConfigurableHTTPProxy.debug = True
+# c.JupyterHub.log_level = "DEBUG"
+# c.LocalProcessSpawner.debug = True
+# c.Spawner.debug = True
