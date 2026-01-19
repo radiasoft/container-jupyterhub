@@ -9,7 +9,7 @@ rm -rf run
 export USER_D=$PWD/run/user
 export TLS_DIR=/srv/jupyterhub
 export PUBLIC_IP=127.0.0.1
-export POOL_HOST=$(hostname -f)
+export POOL_HOST=localhost.localdomain
 if [[ ! $(sudo cat /etc/docker/daemon.json) =~ $POOL_HOST ]]; then
     export POOL_HOST=localhost.localdomain
     if [[ ! $(sudo cat /etc/docker/daemon.json) =~ $POOL_HOST ]]; then
