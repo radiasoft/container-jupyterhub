@@ -25,8 +25,8 @@ build_as_run_user() {
         'jupyterhub==5.4.3'
         'oauthenticator==17.3.0'
         'dockerspawner==14.0.0'
-        'pykern'
-        'sirepo'
+        "git+https://github.com/radiasoft/pykern.git${PYKERN_BRANCH:+@$PYKERN_BRANCH}"
+        "git+https://github.com/radiasoft/sirepo.git${SIREPO_BRANCH:+@$SIREPO_BRANCH}"
         'git+https://github.com/radiasoft/rsdockerspawner.git'
     )
     install_pip_install "${x[@]}"
