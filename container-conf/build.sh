@@ -2,6 +2,7 @@
 build_image_base=radiasoft/python3
 build_docker_cmd=
 build_is_public=1
+build_passenv='PYKERN_BRANCH SIREPO_BRANCH'
 
 build_as_root() {
     # POSIT: This is sirepo.srdb_root
